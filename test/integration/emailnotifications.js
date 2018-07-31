@@ -58,8 +58,8 @@ describe('Email notifications', function() {
                 subjectPrefix: '[test wallet]',
                 publicTxUrlTemplate: {
                   btc: {
-                    livenet: 'https://insight.bitpay.com/tx/{{txid}}',
-                    testnet: 'https://test-insight.bitpay.com/tx/{{txid}}',
+                    livenet: 'https://insight.alarmx.io/tx/{{txid}}',
+                    testnet: 'https://test-insight.alarmx.io/tx/{{txid}}',
                   },
                   bch: {
                     livenet: 'https://bch-insight.bitpay.com/tx/{{txid}}',
@@ -207,7 +207,7 @@ describe('Email notifications', function() {
             one.subject.should.contain('Payment sent');
             one.text.should.contain('800,000');
             should.exist(one.html);
-            one.html.should.contain('https://insight.bitpay.com/tx/' + txp.txid);
+            one.html.should.contain('https://insight.alarmx.io/tx/' + txp.txid);
             server.storage.fetchUnsentEmails(function(err, unsent) {
               should.not.exist(err);
               unsent.should.be.empty;
@@ -479,8 +479,8 @@ describe('Email notifications', function() {
                 subjectPrefix: '[test wallet]',
                 publicTxUrlTemplate: {
                   btc: {
-                    livenet: 'https://insight.bitpay.com/tx/{{txid}}',
-                    testnet: 'https://test-insight.bitpay.com/tx/{{txid}}',
+                    livenet: 'https://insight.alarmx.io/tx/{{txid}}',
+                    testnet: 'https://test-insight.alarmx.io/tx/{{txid}}',
                   },
                   bch: {
                     livenet: 'https://bch-insight.bitpay.com/tx/{{txid}}',
