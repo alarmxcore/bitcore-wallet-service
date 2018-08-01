@@ -1,7 +1,7 @@
 
 # bitcore-wallet-service-alarmx
 
-[![NPM Package](https://img.shields.io/npm/v/bitcore-wallet-service-alarmx.svg?style=flat-square)](https://www.npmjs.org/package/bitcore-wallet-service-alarmx)
+[![NPM Package](https://img.shields.io/npm/v/bitcore-wallet-service.svg?style=flat-square)](https://www.npmjs.org/package/bitcore-wallet-service)
 [![Build Status](https://img.shields.io/travis/bitpay/bitcore-wallet-service.svg?branch=master&style=flat-square)](https://travis-ci.org/bitpay/bitcore-wallet-service)
 [![Coverage Status](https://coveralls.io/repos/bitpay/bitcore-wallet-service/badge.svg?branch=master)](https://coveralls.io/r/bitpay/bitcore-wallet-service?branch=master)
 
@@ -39,7 +39,7 @@ BWS uses by default a Request Rate Limitation to CreateWallet endpoint. If you n
 BWS can be used with PM2 with the provided `app.js` script:
 
 ```
-  pm2 start app.js --name "bitcoin-wallet-service"
+  pm2 start app.js --name "bitcoin-wallet-service-alarmx"
 ```
 
 # Security Considerations
@@ -67,7 +67,7 @@ BWS can be used with PM2 with the provided `app.js` script:
   // CAroot: '', // ex. 'AddTrustExternalCARoot.crt'
 ```
 
-@dabura667 made a report about how to use letsencrypt with BWS: https://github.com/alarmxcore/bitcore-wallet-service-alarmx/issues/423
+@dabura667 made a report about how to use letsencrypt with BWS: https://github.com/bitpay/bitcore-wallet-service/issues/423
 
 
 # REST API
