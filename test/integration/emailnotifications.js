@@ -57,14 +57,8 @@ describe('Email notifications', function() {
                 from: 'bws@dummy.net',
                 subjectPrefix: '[test wallet]',
                 publicTxUrlTemplate: {
-                  btc: {
-                    livenet: 'https://insight.alarmx.io/tx/{{txid}}',
-                    testnet: 'https://test-insight.alarmx.io/tx/{{txid}}',
-                  },
-                  bch: {
-                    livenet: 'https://bch-insight.bitpay.com/tx/{{txid}}',
-                    testnet: 'https://test-bch-insight.bitpay.com/tx/{{txid}}',
-                  }
+                  livenet: 'https://insight.bitpay.com/tx/{{txid}}',
+                  testnet: 'https://test-insight.bitpay.com/tx/{{txid}}',
                 },
               },
             }, function(err) {
@@ -88,7 +82,7 @@ describe('Email notifications', function() {
       helpers.stubUtxos(server, wallet, [1, 1], function() {
         var txOpts = {
           outputs: [{
-            toAddress: '18PzpUFkFZE8zKWUPvfykkTxmB9oMR8qP7',
+            toAddress: 'XqHSiRAXd3EmNUPCAqok6ch5XzVWqKg7VD',
             amount: 0.8e8
           }],
           feePerKb: 100e2
@@ -125,7 +119,7 @@ describe('Email notifications', function() {
       helpers.stubUtxos(server, wallet, [1, 1], function() {
         var txOpts = {
           outputs: [{
-            toAddress: '18PzpUFkFZE8zKWUPvfykkTxmB9oMR8qP7',
+            toAddress: 'XqHSiRAXd3EmNUPCAqok6ch5XzVWqKg7VD',
             amount: 0.8e8
           }],
           feePerKb: 100e2
@@ -157,7 +151,7 @@ describe('Email notifications', function() {
       helpers.stubUtxos(server, wallet, [1, 1], function() {
         var txOpts = {
           outputs: [{
-            toAddress: '18PzpUFkFZE8zKWUPvfykkTxmB9oMR8qP7',
+            toAddress: 'XqHSiRAXd3EmNUPCAqok6ch5XzVWqKg7VD',
             amount: 0.8e8
           }],
           feePerKb: 100e2
@@ -207,7 +201,7 @@ describe('Email notifications', function() {
             one.subject.should.contain('Payment sent');
             one.text.should.contain('800,000');
             should.exist(one.html);
-            one.html.should.contain('https://insight.alarmx.io/tx/' + txp.txid);
+            one.html.should.contain('https://insight.bitpay.com/tx/' + txp.txid);
             server.storage.fetchUnsentEmails(function(err, unsent) {
               should.not.exist(err);
               unsent.should.be.empty;
@@ -223,7 +217,7 @@ describe('Email notifications', function() {
       helpers.stubUtxos(server, wallet, 1, function() {
         var txOpts = {
           outputs: [{
-            toAddress: '18PzpUFkFZE8zKWUPvfykkTxmB9oMR8qP7',
+            toAddress: 'XqHSiRAXd3EmNUPCAqok6ch5XzVWqKg7VD',
             amount: 0.8e8
           }],
           feePerKb: 100e2
@@ -425,7 +419,7 @@ describe('Email notifications', function() {
         helpers.stubUtxos(server, wallet, 1, function() {
           var txOpts = {
             outputs: [{
-              toAddress: '18PzpUFkFZE8zKWUPvfykkTxmB9oMR8qP7',
+              toAddress: 'XqHSiRAXd3EmNUPCAqok6ch5XzVWqKg7VD',
               amount: 0.8e8
             }],
             feePerKb: 100e2
@@ -478,14 +472,8 @@ describe('Email notifications', function() {
                 from: 'bws@dummy.net',
                 subjectPrefix: '[test wallet]',
                 publicTxUrlTemplate: {
-                  btc: {
-                    livenet: 'https://insight.alarmx.io/tx/{{txid}}',
-                    testnet: 'https://test-insight.alarmx.io/tx/{{txid}}',
-                  },
-                  bch: {
-                    livenet: 'https://bch-insight.bitpay.com/tx/{{txid}}',
-                    testnet: 'https://test-bch-insight.bitpay.com/tx/{{txid}}',
-                  }
+                  livenet: 'https://insight.bitpay.com/tx/{{txid}}',
+                  testnet: 'https://test-insight.bitpay.com/tx/{{txid}}',
                 },
               },
             }, function(err) {
@@ -500,7 +488,7 @@ describe('Email notifications', function() {
         helpers.stubUtxos(server, wallet, [1, 1], function() {
           var txOpts = {
             outputs: [{
-              toAddress: '18PzpUFkFZE8zKWUPvfykkTxmB9oMR8qP7',
+              toAddress: 'XqHSiRAXd3EmNUPCAqok6ch5XzVWqKg7VD',
               amount: 0.8e8
             }],
             feePerKb: 100e2

@@ -6,12 +6,12 @@ var config = {
   // Uncomment to make BWS a forking server
   // cluster: true,
 
-  // Uncomment to set the number or process (will use the nr of availalbe CPUs by default)
+  // Uncomment to set the number or process (will use the # of available CPUs by default)
   // clusterInstances: 4,
 
-  // https: true,
-  // privateKeyFile: 'private.pem',
-  // certificateFile: 'cert.pem',
+   https: true,
+   privateKeyFile: 'private.pem',
+   certificateFile: 'cert.pem',
   ////// The following is only for certs which are not
   ////// trusted by nodejs 'https' by default
   ////// CAs like Verisign do not require this
@@ -41,28 +41,23 @@ var config = {
     btc: {
       livenet: {
         provider: 'insight',
-        url: 'https://insight.alarmx.io:443',
+        url: 'https://insight.alarmx.io',
+        apiPrefix:'/insight-api-alarmx'
       },
       testnet: {
         provider: 'insight',
-        url: 'https://test-insight.alarmx.io:443',
+        url: 'https://testnet-insight.alarmx.io', //Don't exist yet
+        apiPrefix:'/insight-api-alarmx'
+        // url: 'http://localhost:3001',
         // Multiple servers (in priority order)
-        // url: ['http://a.b.c', 'https://test-insight.alarmx.io:443'],
+        // url: ['http://a.b.c', 'https://test-insight.bitpay.com:443'],
       },
     },
     bch: {
       livenet: {
         provider: 'insight',
-        //url: 'https://cashexplorer.bitcoin.com',
-        url: 'https://bch-insight.bitpay.com:443',
-        addressFormat: 'cashaddr',  // copay, cashaddr, or legacy
+        url: 'https://cashexplorer.bitcoin.com',
       },
-      testnet: {
-        provider: 'insight',
-        url: 'https://test-bch-insight.bitpay.com:443',
-        addressFormat: 'cashaddr',  // copay, cashaddr, or legacy
-      },
-
     },
   },
   pushNotificationsOpts: {
@@ -88,16 +83,11 @@ var config = {
   //  defaultLanguage: 'en',
   //  defaultUnit: 'btc',
   //  publicTxUrlTemplate: {
-  //    btc: {
-  //      livenet: 'https://insight.alarmx.io/tx/{{txid}}',
-  //      testnet: 'https://test-insight.alarmx.io/tx/{{txid}}',
-  //    },
-  //    bch: {
-  //      livenet: 'https://bch-insight.bitpay.com/tx/{{txid}}',
-  //      testnet: 'https://test-bch-insight.bitpay.com/tx/{{txid}}',
-  //    }
+  //    livenet: 'https://insight.bitpay.com/tx/{{txid}}',
+  //    testnet: 'https://test-insight.bitpay.com/tx/{{txid}}',
   //  },
-  // },
+  //},
+  //
   // To use sendgrid:
   // var sgTransport = require('nodemail-sendgrid-transport');
   // mailer:sgTransport({

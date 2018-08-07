@@ -86,7 +86,7 @@ Service.prototype._getConfiguration = function() {
 
   // A bitcore-node is either livenet or testnet, so we'll pass
   // the configuration options to communicate via the local running
-  // instance of the insight-api-alarmx service.
+  // instance of the insight-api service.
   if (self.node.network === Networks.livenet) {
     baseConfig.blockchainExplorerOpts = {
       livenet: providerOptions

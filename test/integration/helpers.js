@@ -185,7 +185,6 @@ helpers.createAndJoinWallet = function(m, n, opts, cb) {
     pubKey: TestData.keyPair.pub,
     singleAddress: !!opts.singleAddress,
     coin: opts.coin || 'btc',
-    network: opts.network || 'livenet',
   };
   if (_.isBoolean(opts.supportBIP44AndP2PKH))
     walletOpts.supportBIP44AndP2PKH = opts.supportBIP44AndP2PKH;
@@ -195,18 +194,11 @@ helpers.createAndJoinWallet = function(m, n, opts, cb) {
 
     async.each(_.range(n), function(i, cb) {
       var copayerData = TestData.copayers[i + offset];
-
-
-    var pub = (_.isBoolean(opts.supportBIP44AndP2PKH) && !opts.supportBIP44AndP2PKH) ? copayerData.xPubKey_45H : copayerData.xPubKey_44H_0H_0H;
-
-    if (opts.network == 'testnet') 
-      pub = copayerData.xPubKey_44H_0H_0Ht;
-
       var copayerOpts = helpers.getSignedCopayerOpts({
         walletId: walletId,
         coin: opts.coin,
         name: 'copayer ' + (i + 1),
-        xPubKey: pub,
+        xPubKey: (_.isBoolean(opts.supportBIP44AndP2PKH) && !opts.supportBIP44AndP2PKH) ? copayerData.xPubKey_45H : copayerData.xPubKey_44H_0H_0H,
         requestPubKey: copayerData.pubKey_1H_0,
         customData: 'custom data ' + (i + 1),
       });
@@ -214,7 +206,6 @@ helpers.createAndJoinWallet = function(m, n, opts, cb) {
         copayerOpts.supportBIP44AndP2PKH = opts.supportBIP44AndP2PKH;
 
       server.joinWallet(copayerOpts, function(err, result) {
-        if (err) console.log(err);
         should.not.exist(err);
         copayerIds.push(result.copayerId);
         return cb(err);
@@ -389,22 +380,8 @@ helpers.stubFeeLevels = function(levels) {
   };
 };
 
-
-var stubAddressActivityFailsOn = null;
-var stubAddressActivityFailsOnCount=1;
-helpers.stubAddressActivity = function(activeAddresses, failsOn) {
-
-  stubAddressActivityFailsOnCount=1;
-
-  // could be null
-  stubAddressActivityFailsOn = failsOn;
-
+helpers.stubAddressActivity = function(activeAddresses) {
   blockchainExplorer.getAddressActivity = function(address, cb) {
-    if (stubAddressActivityFailsOnCount === stubAddressActivityFailsOn) 
-      return cb('failed on request');
-
-    stubAddressActivityFailsOnCount++;
-
     return cb(null, _.contains(activeAddresses, address));
   };
 };
@@ -416,7 +393,11 @@ helpers.clientSign = function(txp, derivedXPrivKey) {
   var privs = [];
   var derived = {};
 
-  var xpriv = new Bitcore.HDPrivateKey(derivedXPrivKey, txp.network);
+  if (txp.coin == 'bch') {
+      var xpriv = new Bitcore_.bch.HDPrivateKey(derivedXPrivKey, txp.network);
+  } else {
+      var xpriv = new Bitcore.HDPrivateKey(derivedXPrivKey, txp.network);
+  }
 
   _.each(txp.inputs, function(i) {
     if (!derived[i.path]) {
